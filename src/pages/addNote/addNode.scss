@@ -1,0 +1,14 @@
+.addNode_container{
+    >form{
+        max-width: 350px;
+       
+        margin:10px auto;
+        padding: 15px;
+        >button , >textarea{
+            display: block;
+            width: 300px;
+            padding: auto;
+            margin: 10px auto;
+        }
+    }
+}
