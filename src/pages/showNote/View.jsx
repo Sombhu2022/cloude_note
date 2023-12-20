@@ -17,7 +17,7 @@ function View() {
   const allNote = async () => {
     try{
 
-      const { data } = await axios.get(`${baseUrl}/note`, {
+      const { data } = await axios.get(`${baseUrl}/note/`, {
         headers: { Content_type: "application/json" },
       });
       setNote(data.note);
