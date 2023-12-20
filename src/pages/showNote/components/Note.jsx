@@ -11,9 +11,9 @@ function Note({ note, id, date, onDelete }) {
       </p>
       <div className="options">
 
-      <button className="primary_button " onClick={onDelete}>delete</button>
+      <button className="primary_button " onClick={onDelete}>❌</button>
       <Link to={`/edit/${id}`}>
-        <button className="primary_button">edit</button>
+        <button className="primary_button">✏️</button>
       </Link>
       </div>
     </div>
