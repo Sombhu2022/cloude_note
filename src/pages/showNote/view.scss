@@ -1,0 +1,15 @@
+.View_container{
+    // background: var(--theme_color);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 20px;
+    .note_container{
+
+        .options{
+             display: flex;
+             flex-wrap: nowrap;
+             justify-content: flex-end;
+             gap: 10px;
+        }
+    }
+}
