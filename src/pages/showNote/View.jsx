@@ -32,6 +32,7 @@ function View() {
       
       const  {data}  = await axios.delete(`${baseUrl}/note/${id}`, {
         headers: { Content_type: "application/json" },
+        withCredentials: true
       });
       toast.success(data.message)
       allNote();
