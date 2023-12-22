@@ -7,6 +7,8 @@ import './global.css'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Register from "./pages/user/registration/Register";
+import Login from "./pages/user/login/Login";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Routes>
           <Route path="/" element={<View />}></Route>
           <Route path="/post" element={<AddNote />}></Route>
+          <Route path="/sign up" element={<Register />}></Route>
+          <Route path="/log in" element={<Login />}></Route>
           <Route path="/edit/:id" element={<Edit />}></Route>
         </Routes>
       </Router>
@@ -35,4 +39,5 @@ function App() {
 }
 
 export default App;
-export const baseUrl = "https://note-api-cbkb.onrender.com"
+// export const baseUrl = "https://note-api-cbkb.onrender.com" 
+export const baseUrl = "http://localhost:8000"
