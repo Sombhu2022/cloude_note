@@ -1,0 +1,15 @@
+.note_container{
+    margin: 10px auto;
+    padding: 5px 10px;
+    background: var(--white);
+    border: solid 1px rgba(252, 251, 251, 0.979);
+    box-shadow: 2px 2px 4px 1px white;
+    >p{
+    background: inherit;
+   
+    }
+    .options{
+        background: inherit;
+    }
+    
+}

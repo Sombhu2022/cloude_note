@@ -35,7 +35,7 @@ function Register() {
   return (
     <div>
       <form action="">
-        <input type="file" />
+        
         <input
           className="primary_input"
           type="text"
