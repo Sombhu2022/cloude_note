@@ -1,14 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import AddNote from "./pages/addNote/AddNote";
-import View from "./pages/showNote/View";
-import Edit from "./pages/showNote/components/Edit";
+
 import './global.css'
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Register from "./pages/user/registration/Register";
 import Login from "./pages/user/login/Login";
+import View from "./pages/note/show/View";
+import AddNote from "./pages/note/post/AddNote";
+import Edit from "./pages/note/edit/Edit";
 
 function App() {
   return (
@@ -25,13 +26,14 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+
       <Router>
         <Routes>
-          <Route path="/" element={<View />}></Route>
-          <Route path="/post" element={<AddNote />}></Route>
+          <Route path="/" element={<View/>}></Route>
+          <Route path="/post" element={<AddNote/>}></Route>
           <Route path="/sign up" element={<Register />}></Route>
           <Route path="/log in" element={<Login />}></Route>
-          <Route path="/edit/:id" element={<Edit />}></Route>
+          <Route path="/edit/:id" element={<Edit/>}></Route>
         </Routes>
       </Router>
     </div>

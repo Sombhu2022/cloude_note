@@ -1,0 +1,44 @@
+.View_container{
+    background: var(--other);
+    max-width: 700px;
+    margin: 30px auto;
+    font-size: 20px;
+    // border: solid 1px black;
+   padding: 5px 5px;
+    .primary_option
+    {
+        display: flex;
+        flex-wrap: nowrap;
+        // flex-direction:column;
+        .left_button{
+            width: 200px; 
+            justify-content: flex-start;
+        }
+        .right_button{
+            width: -webkit-fill-available;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+        }
+
+
+    }
+    .note_container{
+
+        .options{
+             display: flex;
+             flex-wrap: nowrap;
+             justify-content: flex-end;
+             gap: 10px;
+        }
+    }
+}
+
+@media only screen and (max-width:710px) {
+    
+ .View_container{
+    margin: 0px 0px;
+    padding: 10px 15px;
+ }
+
+}

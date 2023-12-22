@@ -2,25 +2,39 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* background:linear-gradient( 30deg, rgba(160, 209, 229, 0.47) , rgba(149, 211, 235, 0.68)); */
+    /* background:linear-gradient( 90deg, rgba(243, 140, 50, 0.249) , rgba(225, 225, 72, 0.358)); */
     
 }
 
 :root{
+    --other:linear-gradient( 90deg, rgba(243, 140, 50, 0.249) , rgba(225, 225, 72, 0.358));
     --theme_color:linear-gradient( 30deg, rgba(160, 209, 229, 0.47) , rgba(149, 211, 235, 0.68));
     --white:whitesmoke;
 }
 
 .main_div{
+   
     max-width: 1200px;
-    height: auto;
+    /* height:100vh; */
     border-radius: 10px;
     margin: 10px auto;
+/* 
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column; */
     
 }
  form {
     max-width: 500px;
-    margin: 0 auto;
+    margin: auto auto;
+    /* border: solid black 1px; */
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
  }
 
 .primary_button{
@@ -37,10 +51,17 @@
     color: var(--white);
 }
 
-.primary_inputbox{
+input{
+    max-width: 300px;
     padding:10px 10px;
     border-radius: 10px;
     font-family: serif;
     font-size: 18px;
     border: solid 1px black;
+}
+.icon{
+    background: inherit;
+}
+p{
+    background: inherit;
 }

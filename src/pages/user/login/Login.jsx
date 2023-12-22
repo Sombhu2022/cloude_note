@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../App";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [user, setUser] = useState({});
@@ -50,7 +51,10 @@ function Login() {
         >
           Log in
         </button>
+
+        <Link to={'/sign up'}>registration</Link>
       </form>
+
     </div>
   );
 }
