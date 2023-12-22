@@ -18,8 +18,11 @@ function View() {
   };
 
   const allNote = async () => {
-    try {
+
+    try{
+
       const { data } = await axios.get(`${baseUrl}/note`, {
+
         headers: { Content_type: "application/json" },
         withCredentials: true,
       });
@@ -34,8 +37,9 @@ function View() {
     try {
       const { data } = await axios.delete(`${baseUrl}/note/${id}`, {
         headers: { Content_type: "application/json" },
+
         withCredentials: true,
-      });
+ });
       toast.success(data.message);
       allNote();
     } catch (error) {
