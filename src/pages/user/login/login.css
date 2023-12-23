@@ -1,0 +1,26 @@
+.login_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--other);
+}
+.login_container > form {
+  margin: 10px auto;
+  padding: 15px;
+}
+.login_container > form > input {
+  border: solid 1px white;
+  background: var(--white);
+  display: block;
+  max-width: 500px;
+  padding: auto;
+  margin: 10px auto;
+  outline: none;
+  width: 100%;
+}
+.login_container > form > button {
+  width: 100%;
+}/*# sourceMappingURL=login.css.map */

@@ -1,0 +1,26 @@
+.addNode_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--other);
+}
+.addNode_container > form {
+  margin: 10px auto;
+  padding: 15px;
+}
+.addNode_container > form > input, .addNode_container > form > textarea {
+  border: solid 1px white;
+  background: var(--white);
+  display: block;
+  max-width: 500px;
+  padding: auto;
+  margin: 10px auto;
+  outline: none;
+  width: 100%;
+}
+.addNode_container > form > button {
+  width: 100%;
+}/*# sourceMappingURL=addNode.css.map */

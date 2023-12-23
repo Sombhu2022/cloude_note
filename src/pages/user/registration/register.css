@@ -1,0 +1,26 @@
+.reg_container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--other);
+}
+.reg_container > form {
+  margin: 10px auto;
+  padding: 15px;
+}
+.reg_container > form > input {
+  border: solid 1px white;
+  background: var(--white);
+  display: block;
+  max-width: 500px;
+  padding: auto;
+  margin: 10px auto;
+  outline: none;
+  width: 100%;
+}
+.reg_container > form > button {
+  width: 100%;
+}/*# sourceMappingURL=register.css.map */

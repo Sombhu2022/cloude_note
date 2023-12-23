@@ -1,0 +1,22 @@
+.profile_container {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--other);
+}
+.profile_container > div {
+  width: 500px;
+  min-height: 400px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.profile_container > div > h2, .profile_container > div > p {
+  margin: 10px auto;
+}/*# sourceMappingURL=profile.css.map */

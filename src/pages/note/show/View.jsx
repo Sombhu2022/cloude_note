@@ -20,7 +20,7 @@ function View() {
 
   const postNavigate = () => {
     if (!authenticate) {
-      toast.error("first log in ");
+      toast.info("first log in ");
       navigete("/log in");
     } else {
       navigete("/post");

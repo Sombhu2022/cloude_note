@@ -1,0 +1,38 @@
+.note_container {
+  margin: 10px auto;
+  padding: 5px 10px;
+  background: var(--white);
+  border: solid 1px white;
+}
+.note_container > p {
+  background: inherit;
+}
+.note_container .option_container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.note_container .option_container .time_container {
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 13px;
+  color: gray;
+  width: 150px;
+}
+.note_container .option_container .options {
+  background: inherit;
+  width: -webkit-fill-available;
+  align-items: center;
+  justify-content: flex-end;
+}
+.note_container .option_container .options .button {
+  border: none;
+  margin: 0px 10px;
+}
+.note_container .option_container .options .delete_button {
+  color: rgb(238, 93, 30);
+  background: inherit;
+}
+.note_container .option_container .options .edit_button {
+  color: rgb(20, 167, 20);
+  background: inherit;
+}/*# sourceMappingURL=note.css.map */
