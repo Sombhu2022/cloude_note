@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../App";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [user, setUser] = useState({});
+  const navigate = useNavigate()
   const dataHandaler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -23,6 +24,7 @@ function Login() {
       });
       console.log(data);
       toast.success(data.message);
+      navigate('/')
     } catch (error) {
       toast.error(error.message);
       console.log(error);

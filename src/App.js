@@ -41,5 +41,5 @@ function App() {
 }
 
 export default App;
-export const baseUrl = "https://note-api-cbkb.onrender.com" 
-// export const baseUrl = "http://localhost:8000"
+// export const baseUrl = "https://note-api-cbkb.onrender.com" 
+export const baseUrl = "http://localhost:8000"
