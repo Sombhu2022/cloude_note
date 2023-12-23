@@ -8,16 +8,15 @@
 
 :root{
     --other:linear-gradient( 90deg, rgba(243, 140, 50, 0.249) , rgba(225, 225, 72, 0.358));
-    --theme_color:linear-gradient( 30deg, rgba(160, 209, 229, 0.47) , rgba(149, 211, 235, 0.68));
+    --theme_color:linear-gradient(  rgba(160, 209, 229, 0.482) , rgba(128, 216, 251, 0.779));
     --white:whitesmoke;
 }
 
 .main_div{
-   
-    max-width: 1200px;
+     background: var(--other);
     /* height:100vh; */
     border-radius: 10px;
-    margin: 10px auto;
+    margin: 0px auto;
 /* 
     display: flex;
     flex-wrap: nowrap;
@@ -27,7 +26,7 @@
     
 }
  form {
-    max-width: 500px;
+    max-width: 700px;
     margin: auto auto;
     /* border: solid black 1px; */
     display: flex;
@@ -51,8 +50,8 @@
     color: var(--white);
 }
 
-input{
-    max-width: 300px;
+input , .primary_inputbox{
+    max-width: 500px;
     padding:10px 10px;
     border-radius: 10px;
     font-family: serif;

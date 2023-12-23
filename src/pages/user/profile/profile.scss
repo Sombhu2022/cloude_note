@@ -1,0 +1,28 @@
+.profile_container{
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--other);
+
+    >div{
+        width: 500px;
+        min-height: 400px;
+        // border: solid 1px white;
+        // background: var(--white);
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        >h2 , >p{
+            margin: 10px auto;
+        }
+       
+    }
+
+}

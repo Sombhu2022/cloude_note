@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../App";
 import { Link, useNavigate } from "react-router-dom";
+import './login.scss'
 
 function Login() {
   const [user, setUser] = useState({});
@@ -22,17 +23,17 @@ function Login() {
         headers: { Content_type: "application/json" },
         withCredentials: true,
       });
-      console.log(data);
+      // console.log(data);
       toast.success(data.message);
       navigate('/')
     } catch (error) {
-      toast.error(error.message);
-      console.log(error);
+      toast.error(error.response.data.message);
+      // console.log(error);
     }
   };
 
   return (
-    <div>
+    <div className="login_container">
       <form action="">
         <input
           type="text"
@@ -53,8 +54,13 @@ function Login() {
         >
           Log in
         </button>
+        <br />
+        <br />
+       
 
-        <Link to={'/sign up'}>registration</Link>
+        if you not register, then click 
+        <Link to={'/sign up'}> registration</Link>
+        
       </form>
 
     </div>
