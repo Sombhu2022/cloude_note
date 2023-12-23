@@ -6,20 +6,37 @@
    
     >p{
     background: inherit;
-    
     }
-    .options{
-        background: inherit;
-        .button{
-            border: none;
-            // font-size: 20px;
-            margin: 0px 10px;
+    .option_container{
+        display: flex;
+        flex-wrap: nowrap;
+        .time_container{
+            align-items: center;
+            justify-content: flex-start;
+            font-size: 13px;
+            color: gray;
+            width:150px ;
+
         }
-        .delete_button{
-            color: rgb(238, 93, 30);
-        }
-        .edit_button{
-            color: rgb(20, 167, 20);
+        .options{
+            background: inherit;
+            width: -webkit-fill-available;
+            align-items: center;
+            justify-content: flex-end;
+            .button{
+                border: none;
+                // font-size: 20px;
+                margin: 0px 10px;
+            }
+            .delete_button{
+                color: rgb(238, 93, 30);
+                background: inherit;
+            }
+            .edit_button{
+                color: rgb(20, 167, 20);
+                background: inherit;
+    
+            }
         }
     }
     

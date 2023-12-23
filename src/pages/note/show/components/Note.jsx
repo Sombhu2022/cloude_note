@@ -6,12 +6,18 @@ import './note.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
+import ReactTimeAgo from 'react-time-ago'
+
 function Note({ note, id,subject , date, onDelete }) {
   return (
     <div className="main_div note_container" >
       <p>{subject}
-      {/* <i>{date}</i> */}
       </p>
+      <div className="option_container">
+
+      <div className="time_container">
+      <ReactTimeAgo date={date} locale="en-US"/>
+      </div>
       <div className="options">
 
       <button className="button delete_button" onClick={onDelete}>
@@ -22,6 +28,7 @@ function Note({ note, id,subject , date, onDelete }) {
         <FontAwesomeIcon icon={faPen} className="icon" />
         </button>
       </Link>
+      </div>
       </div>
     </div>
   );
