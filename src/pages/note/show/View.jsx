@@ -1,23 +1,30 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Note from "./components/Note";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./view.scss";
 import { baseUrl } from "../../../App";
 
-
 function View() {
   // const [usercookie , setUserCookie]=useState('')
+  const [totalUser, setTotalUser] = useState();
+  const [user, setUser] = useState({});
   const [authenticate, setAuthenticate] = useState(true);
   const [note, setNote] = useState([]);
   const navigete = useNavigate();
+
   const postNavigate = () => {
-    navigete("/post");
+    if (!authenticate) {
+      toast.error("first log in ");
+      navigete("/log in");
+    } else {
+      navigete("/post");
+    }
   };
 
   const allNote = async () => {
@@ -27,9 +34,10 @@ function View() {
         withCredentials: true,
       });
       setNote(data.note);
-      console.log(data.note);
+      // console.log(data);
+      setUser(data.user);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response.data.success === false) {
         setAuthenticate(false);
       }
@@ -46,7 +54,7 @@ function View() {
       toast.success(data.message);
       allNote();
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.message);
     }
   };
@@ -59,7 +67,8 @@ function View() {
         },
         withCredentials: true,
       });
-      console.log(data);
+      // console.log(data.user.length);
+      setTotalUser(data.user.length);
     } catch (error) {
       toast.error("log in first");
     }
@@ -86,17 +95,51 @@ function View() {
       toast.success(data.message);
     } catch (error) {
       toast.error(error.message);
-      console.log(error);
+      // console.log(error);
     }
 
     navigete("/log in");
   };
+
+
+
+  const profileHandle = ()=>{
+
+    if(authenticate){
+      navigete(`/profile/${user.id}`)
+    }
+    else{
+      toast.info('first log in , then manage your profile')
+    }
+  }
+
+
   return (
     <div className="main_div View_container">
+      <div className="data_container">
+
+        <div className="navbar">
+          <div className="left_container">
+            <h3>
+              Wellcome ,<br />
+              {authenticate ? (
+              user.name ) : (
+                " "
+              )}
+        
+            </h3>
+          </div>
+          <div className="right_container">
+            
+            <FontAwesomeIcon icon={faGear}  onClick={profileHandle}/>
+            
+          </div>
+        </div>
+    
       <div className="primary_option">
         <div className="left_button">
           <button onClick={postNavigate} className="primary_button ">
-            <FontAwesomeIcon icon={faPlus} className="icon" /> Add note
+            <FontAwesomeIcon icon={faPlus} className="" /> Add 
           </button>
         </div>
         <div className="right_button">
@@ -126,6 +169,18 @@ function View() {
           </div>
         );
       })}
+     </div>
+      <div className="user_countainer">
+        
+          <div className="user">
+            <p>Users</p>
+            {authenticate ? (
+            <p>{totalUser}</p> ) : (
+              ""
+            )}
+          </div>
+       
+      </div>
     </div>
   );
 }

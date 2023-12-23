@@ -23,7 +23,7 @@ function AddNote() {
       toast.success(data.message);
       navigate('/')
     } catch (error) {
-      console.log('error:=>',error)
+      // console.log('error:=>',error)
       toast.error(error.message);
         }
     

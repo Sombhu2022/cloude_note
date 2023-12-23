@@ -14,11 +14,11 @@ function Note({ note, id,subject , date, onDelete }) {
       </p>
       <div className="options">
 
-      <button className="delete " onClick={onDelete}>
+      <button className="button delete_button" onClick={onDelete}>
       <FontAwesomeIcon icon={faTrash} className="icon" />
       </button>
       <Link to={`/edit/${id}`}>
-        <button className="edit">
+        <button className="button edit_button">
         <FontAwesomeIcon icon={faPen} className="icon" />
         </button>
       </Link>

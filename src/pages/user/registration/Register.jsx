@@ -2,9 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../App";
+import { useNavigate } from "react-router-dom";
+
+import './register.scss'
 
 function Register() {
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
   const dataHandaler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -14,6 +18,8 @@ function Register() {
     if (!user) return toast.error("fill the sign up form");
     if (!user.email || !user.password || !user.confirmPassword)
       return toast.error("fill all requirment fill");
+    if (user.password.length < 8)
+      return toast.error("password must be 8 digit or more");
     if (user.password !== user.confirmPassword)
       return toast.error("password and confirm password are not matched");
    try {
@@ -23,9 +29,10 @@ function Register() {
        })
        console.log(data)
        toast.success(data.message) 
+       navigate('/')
     } catch (error) {
-       toast.error(error.message) 
-       console.log(error)
+       toast.error(error.response.data.message) 
+      //  console.log(error)
    }
 
 
@@ -33,7 +40,7 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="main_div reg_container">
       <form action="">
         
         <input
