@@ -10,7 +10,10 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "./view.scss";
 import { baseUrl } from "../../../App";
 
+
 function View() {
+  // const [usercookie , setUserCookie]=useState('')
+  const [authenticate, setAuthenticate] = useState(true);
   const [note, setNote] = useState([]);
   const navigete = useNavigate();
   const postNavigate = () => {
@@ -18,11 +21,8 @@ function View() {
   };
 
   const allNote = async () => {
-
-    try{
-
+    try {
       const { data } = await axios.get(`${baseUrl}/note`, {
-
         headers: { Content_type: "application/json" },
         withCredentials: true,
       });
@@ -30,6 +30,9 @@ function View() {
       console.log(data.note);
     } catch (error) {
       console.log(error);
+      if (error.response.data.success === false) {
+        setAuthenticate(false);
+      }
     }
   };
 
@@ -39,32 +42,36 @@ function View() {
         headers: { Content_type: "application/json" },
 
         withCredentials: true,
- });
+      });
       toast.success(data.message);
       allNote();
     } catch (error) {
       console.log(error);
-      toast.success(error.message);
+      toast.error(error.message);
     }
   };
 
   const userData = async () => {
-    const { data } = await axios.get(`${baseUrl}/user/alluser`, {
-      headers: {
-        Content_type: "application/json",
-      },
-      withCredentials: true,
-    });
-    console.log(data);
+    try {
+      const { data } = await axios.get(`${baseUrl}/user/alluser`, {
+        headers: {
+          Content_type: "application/json",
+        },
+        withCredentials: true,
+      });
+      console.log(data);
+    } catch (error) {
+      toast.error("log in first");
+    }
   };
+
   useEffect(() => {
     allNote();
     userData();
+    // const token = Cookies.get('usercookie');
+    // console.log(token);
   }, []);
 
-  const signUpNavigate = () => {
-    navigete("/sign up");
-  };
   const logInNavigate = () => {
     navigete("/log in");
   };
@@ -93,9 +100,15 @@ function View() {
           </button>
         </div>
         <div className="right_button">
-          <button onClick={logoutNavigate} className="primary_button ">
-            Log out
-          </button>
+          {authenticate ? (
+            <button onClick={logoutNavigate} className="primary_button ">
+              log out
+            </button>
+          ) : (
+            <button onClick={logInNavigate} className="primary_button ">
+              log in
+            </button>
+          )}
         </div>
       </div>
 
