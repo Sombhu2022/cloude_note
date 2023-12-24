@@ -43,7 +43,8 @@ function ProfilePage() {
       navigate('/')
     } catch (error) {
       // console.log(error);
-      toast.error(error.message);
+      toast.error(error.message || error.response.data.message);
+
 
     }
   };
