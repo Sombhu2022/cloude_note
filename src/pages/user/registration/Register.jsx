@@ -31,7 +31,7 @@ function Register() {
        toast.success(data.message) 
        navigate('/')
     } catch (error) {
-       toast.error(error.response.data.message) 
+       toast.error(error.response.data.message || error.message) 
       //  console.log(error)
    }
 

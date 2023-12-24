@@ -35,6 +35,7 @@ function Edit() {
   const formHandeler = async (e) => {
     e.preventDefault();
     try {
+      if(!note.note || !note.subject) return toast.info("all filled are required")
       const { data } = await axios.patch(
         `${baseUrl}/note/${id}`,
          note ,
@@ -47,6 +48,8 @@ function Edit() {
       navigate("/");
     } catch (error) {
       // console.log("error:=>", error);
+      toast.error(error.message || error.response.data.message);
+
     }
   };
   

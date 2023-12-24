@@ -7,7 +7,7 @@
 }
 
 :root{
-    --other:linear-gradient( 90deg, rgba(243, 140, 50, 0.249) , rgba(225, 225, 72, 0.358));
+    --other:linear-gradient( 90deg, #f38c323f , rgba(225, 225, 72, 0.358));
     --theme_color:linear-gradient(  rgba(160, 209, 229, 0.482) , rgba(128, 216, 251, 0.779));
     --white:whitesmoke;
 }
