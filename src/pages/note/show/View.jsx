@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Note from "./components/Note";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -144,13 +144,13 @@ function View() {
           </button>
         </div>
         <div className="right_button">
-          {authenticate ? (
-            <button onClick={logoutNavigate} className="primary_button ">
-              log out
-            </button>
-          ) : (
+          {!authenticate ? (
             <button onClick={logInNavigate} className="primary_button ">
               log in
+            </button>
+          ) : (
+            <button onClick={logoutNavigate} className="primary_button ">
+              log out
             </button>
           )}
         </div>
