@@ -14,7 +14,7 @@ function View() {
   // const [usercookie , setUserCookie]=useState('')
   const [totalUser, setTotalUser] = useState();
   const [user, setUser] = useState({});
-  const [authenticate, setAuthenticate] = useState(true);
+  const [authenticate, setAuthenticate] = useState(false);
   const [note, setNote] = useState([]);
   const navigete = useNavigate();
 
@@ -36,11 +36,12 @@ function View() {
       setNote(data.note);
       // console.log(data);
       setUser(data.user);
+      setAuthenticate(true);
     } catch (error) {
       // console.log(error);
-      if (error.response.data.success === false) {
-        setAuthenticate(false);
-      }
+      toast.info("Add your importent node..");
+        // setAuthenticate(false);
+      
     }
   };
 
