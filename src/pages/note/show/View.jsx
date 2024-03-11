@@ -9,6 +9,7 @@ import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./view.scss";
 import { baseUrl } from "../../../App";
+import { useNote, useUser } from "../../../context/context";
 
 function View() {
   // const [usercookie , setUserCookie]=useState('')
@@ -17,6 +18,7 @@ function View() {
   const [authenticate, setAuthenticate] = useState(false);
   const [note, setNote] = useState([]);
   const navigete = useNavigate();
+
 
   const postNavigate = () => {
     if (!authenticate) {
@@ -39,9 +41,11 @@ function View() {
       setAuthenticate(true);
     } catch (error) {
       // console.log(error);
+      if (error.response.data.success === false) {
+
+      }
       toast.info("Add your importent node..");
-        // setAuthenticate(false);
-      
+
     }
   };
 
@@ -76,10 +80,10 @@ function View() {
   };
 
   useEffect(() => {
+   
     allNote();
     userData();
     // const token = Cookies.get('usercookie');
-    // console.log(token);
   }, []);
 
   const logInNavigate = () => {
@@ -103,85 +107,68 @@ function View() {
     navigete("/log in");
   };
 
-
-
-  const profileHandle = ()=>{
-
-    if(authenticate){
-      navigete(`/profile/${user.id}`)
+  const profileHandle = () => {
+    if (authenticate) {
+      navigete(`/profile/${user.id}`);
+    } else {
+      toast.info("first log in , then manage your profile");
     }
-    else{
-      toast.info('first log in , then manage your profile')
-    }
-  }
-
+  };
 
   return (
     <div className="main_div View_container">
       <div className="data_container">
-
         <div className="navbar">
           <div className="left_container">
             <h3>
               Wellcome ,<br />
-              {authenticate ? (
-              user.name ) : (
-                " "
-              )}
-        
+              {authenticate ? user.name : " "}
             </h3>
           </div>
           <div className="right_container">
-            
-            <FontAwesomeIcon icon={faGear}  onClick={profileHandle}/>
-            
+            <FontAwesomeIcon icon={faGear} onClick={profileHandle} />
           </div>
         </div>
-    
-      <div className="primary_option">
-        <div className="left_button">
-          <button onClick={postNavigate} className="primary_button ">
-            <FontAwesomeIcon icon={faPlus} className="" /> Add 
-          </button>
-        </div>
-        <div className="right_button">
-          {!authenticate ? (
-            <button onClick={logInNavigate} className="primary_button ">
-              log in
-            </button>
-          ) : (
-            <button onClick={logoutNavigate} className="primary_button ">
-              log out
-            </button>
-          )}
-        </div>
-      </div>
 
-      {note?.map((ele, index) => {
-        return (
-          <div key={index}>
-            <Note
-              subject={ele.subject}
-              note={ele.note}
-              id={ele._id}
-              date={ele.postAt}
-              onDelete={() => deleteNote(ele._id)}
-            />
-            {/* <EdiitNode onEdit={editNote}/> */}
+        <div className="primary_option">
+          <div className="left_button">
+            <button onClick={postNavigate} className="primary_button ">
+              <FontAwesomeIcon icon={faPlus} className="" /> Add
+            </button>
           </div>
-        );
-      })}
-     </div>
-      <div className="user_countainer">
-        
-          <div className="user">
-            <p>Users</p>
-            {authenticate ? (
-            <p>{totalUser}</p> ) : (
-              ""
+          <div className="right_button">
+            {!authenticate ? (
+              <button onClick={logInNavigate} className="primary_button ">
+                log in
+              </button>
+            ) : (
+              <button onClick={logoutNavigate} className="primary_button ">
+                log out
+              </button>
             )}
           </div>
-       
+        </div>
+
+        {note?.map((ele, index) => {
+          return (
+            <div key={index}>
+              <Note
+                subject={ele.subject}
+                note={ele.note}
+                id={ele._id}
+                date={ele.postAt}
+                onDelete={() => deleteNote(ele._id)}
+              />
+              {/* <EdiitNode onEdit={editNote}/> */}
+            </div>
+          );
+        })}
+      </div>
+      <div className="user_countainer">
+        <div className="user">
+          <p>Users</p>
+          {authenticate ? <p>{totalUser}</p> : ""}
+        </div>
       </div>
     </div>
   );

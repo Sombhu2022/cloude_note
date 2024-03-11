@@ -17,12 +17,12 @@ function Edit() {
       });
       setNote(data.note); 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.success(err.message);
     }
   };
 
- console.log(note)
+//  console.log(note)
 
   useEffect(() => {
     getNote();

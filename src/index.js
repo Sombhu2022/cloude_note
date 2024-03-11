@@ -7,6 +7,9 @@ import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
 
+import UserContext from './context/UserContext';
+import NoteContext from './context/NoteContext';
+
 
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
@@ -14,6 +17,10 @@ TimeAgo.addLocale(ru)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <UserContext>
+      <NoteContext>
+        <App />
+      </NoteContext>
+    </UserContext>
   </React.StrictMode>
 );
