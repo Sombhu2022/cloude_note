@@ -5,12 +5,17 @@ import { baseUrl } from "../../../App";
 import { useNavigate } from "react-router-dom";
 
 import './register.scss'
+import { useUser } from "../../../context/context";
 
 function Register() {
   const [user, setUser] = useState({});
+  // let {user , setUser , AddUser } = useUser();
+ 
+
   const navigate = useNavigate();
   const dataHandaler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+   
   };
 
   const submitHandaler =async (e) => {
@@ -27,17 +32,23 @@ function Register() {
         headers: { Content_type: "application/json" },
         withCredentials: true,
        })
-       console.log(data)
+      
        toast.success(data.message) 
        navigate('/')
     } catch (error) {
        toast.error(error.response.data.message || error.message) 
       //  console.log(error)
    }
-
-
+  // try {
+  //   await AddUser()
+  //   navigate('/')
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  //  console.log("contexapi" , data)
     
   };
+
 
   return (
     <div className="main_div reg_container">
@@ -47,25 +58,25 @@ function Register() {
           className="primary_input"
           type="text"
           name="name"
-          placeholder="enter name"
+          placeholder="Name"
           onChange={dataHandaler}
         />
         <input
           type="email"
           name="email"
-          placeholder="enter email"
+          placeholder="Email"
           onChange={dataHandaler}
         />
         <input
           type="password"
           name="password"
-          placeholder="enter password"
+          placeholder="Password"
           onChange={dataHandaler}
         />
         <input
           type="password"
           name="confirmPassword"
-          placeholder="enter confirm password"
+          placeholder="Confirm Password"
           onChange={dataHandaler}
         />
         <button

@@ -28,7 +28,7 @@ function AddNote() {
   const subjectHandeler = (e) => {
     setSubject(e.target.value);
   };
-  console.log(note, subject);
+  // console.log(note, subject);
 
   const formHandeler = async (e) => {
     e.preventDefault();
