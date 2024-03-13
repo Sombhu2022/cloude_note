@@ -9,8 +9,6 @@ import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./view.scss";
 import { baseUrl } from "../../../App";
-import { useNote, useUser } from "../../../context/context";
-
 function View() {
   // const [usercookie , setUserCookie]=useState('')
   const [totalUser, setTotalUser] = useState();
