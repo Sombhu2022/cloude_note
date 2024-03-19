@@ -9,17 +9,30 @@ import { faGear, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./view.scss";
 import { baseUrl } from "../../../App";
+
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { allNote } from "../../../redux/note/noteController";
+import { logoutUser } from "../../../redux/user/userController";
+
+import { deleteNote } from "../../../redux/note/noteController";
+
 function View() {
   // const [usercookie , setUserCookie]=useState('')
   const [totalUser, setTotalUser] = useState();
-  const [user, setUser] = useState({});
+  const [selectUser, setSelectUser] = useState({});
   const [authenticate, setAuthenticate] = useState(false);
-  const [note, setNote] = useState([]);
+  // const [note, setNote] = useState([]);
   const navigete = useNavigate();
 
-
+  const dispatch = useDispatch()
+  const noteState = useSelector((state)=>state.note)
+  const {user , isAuthenticate , status , error} = useSelector((state)=>state.user)
+  const {note} = useSelector((state)=> state.note)
+  
+console.log(user , note);
   const postNavigate = () => {
-    if (!authenticate) {
+    if (!isAuthenticate) {
       toast.info("first log in ");
       navigete("/log in");
     } else {
@@ -27,16 +40,13 @@ function View() {
     }
   };
 
-  const allNote = async () => {
+  const allNotes = async () => {
     try {
-      const { data } = await axios.get(`${baseUrl}/note`, {
-        headers: { Content_type: "application/json" },
-        withCredentials: true,
-      });
-      setNote(data.note);
+      dispatch(allNote())
+      // setNote(data.note);
       // console.log(data);
-      setUser(data.user);
-      setAuthenticate(true);
+      // setUser(data.user);
+      // setAuthenticate(true);
     } catch (error) {
       // console.log(error);
 
@@ -51,84 +61,61 @@ function View() {
     }
   };
 
-  const deleteNote = async (id) => {
+  const deleteNoteHandle = async (id) => {
     try {
-      const { data } = await axios.delete(`${baseUrl}/note/${id}`, {
-        headers: { Content_type: "application/json" },
-
-        withCredentials: true,
-      });
-      toast.success(data.message);
-      allNote();
+      dispatch(deleteNote(id))
+      // toast.success(data.message);
+      allNotes();
     } catch (error) {
       // console.log(error);
       toast.error(error.message);
     }
   };
 
-  const userData = async () => {
-    try {
-      const { data } = await axios.get(`${baseUrl}/user/alluser`, {
-        headers: {
-          Content_type: "application/json",
-        },
-        withCredentials: true,
-      });
-      // console.log(data.user.length);
-      setTotalUser(data.user.length);
-    } catch (error) {
-      toast.error("log in first");
-    }
-  };
-
-  useEffect(() => {
-   
-    allNote();
-    userData();
-    // const token = Cookies.get('usercookie');
-  }, []);
-
+ 
   const logInNavigate = () => {
     navigete("/log in");
   };
+
   const logoutNavigate = async () => {
     try {
-      const { data } = await axios.get(`${baseUrl}/user/logout`, {
-        headers: {
-          Content_type: "application/json",
-        },
-        withCredentials: true,
-      });
-      toast.success(data.message);
+      dispatch(logoutUser())
+      // toast.success(data.message);
     } catch (error) {
       toast.error(error.message || error.response.data.message);
 
       // console.log(error);
     }
 
-    navigete("/log in");
+    // navigete("/log in");
   };
 
   const profileHandle = () => {
-    if (authenticate) {
+    if (isAuthenticate) {
       navigete(`/profile/${user.id}`);
     } else {
       toast.info("first log in , then manage your profile");
     }
   };
 
+  useEffect(() => {
+    dispatch(allNote())
+  }, [user , isAuthenticate]);
+
   return (
     <div className="main_div View_container">
       <div className="data_container">
         <div className="navbar">
           <div className="left_container">
+          {/* <img src={user.dp?.url} /> */}
             <h3>
               Wellcome ,<br />
-              {authenticate ? user.name : " "}
+              {isAuthenticate ? user.name : " "}
             </h3>
           </div>
           <div className="right_container">
-            <FontAwesomeIcon icon={faGear} onClick={profileHandle} />
+            {/* <FontAwesomeIcon icon={faGear} onClick={profileHandle} /> */}
+            <img src={user.dp?.url} />
           </div>
         </div>
 
@@ -139,7 +126,7 @@ function View() {
             </button>
           </div>
           <div className="right_button">
-            {!authenticate ? (
+            {!isAuthenticate ? (
               <button onClick={logInNavigate} className="primary_button ">
                 log in
               </button>
@@ -155,13 +142,14 @@ function View() {
           return (
             <div key={index}>
               <Note
+                title={ele.title}
                 subject={ele.subject}
-                note={ele.note}
                 id={ele._id}
+                image={ele.image}
                 date={ele.postAt}
-                onDelete={() => deleteNote(ele._id)}
+                onDelete={() => deleteNoteHandle(ele._id)}
               />
-              {/* <EdiitNode onEdit={editNote}/> */}
+              {/* <Edit onEdit={editNote}/> */}
             </div>
           );
         })}
@@ -169,7 +157,7 @@ function View() {
       <div className="user_countainer">
         <div className="user">
           <p>Users</p>
-          {authenticate ? <p>{totalUser}</p> : ""}
+          {isAuthenticate ? <p>{totalUser}</p> : ""}
         </div>
       </div>
     </div>

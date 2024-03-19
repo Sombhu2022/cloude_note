@@ -25,12 +25,14 @@
      padding: 10px 10px;
      background: var(--white);
      .left_container{
-        width: 200px; 
+        width:250px; 
         justify-content: flex-start;
+       
+       
         >h3{
             display: inline-block;
-           
-            width: 100%;
+            align-self: center;
+            width: 80%;
             background: linear-gradient(45deg, rgb(103, 13, 103), rgb(59, 110, 168));
             stroke: 1px solid black;
             color: transparent;
@@ -49,6 +51,11 @@
         justify-content: flex-end;
         align-items: center;
         color: rgba(0, 0, 139);
+        >img{
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
     }
    }
 
@@ -81,6 +88,7 @@
         }
     }
 }
+
 
 
 .user_countainer{

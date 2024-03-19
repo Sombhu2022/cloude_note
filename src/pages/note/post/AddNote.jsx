@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./addNode.scss";
-import { baseUrl } from "../../../App";
+
+import img from "./place.jpeg"
+import imgPlaceHolder from '../../user/registration/img.svg'
 
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMicrophone,
@@ -15,47 +17,60 @@ import {
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-function AddNote() {
+import { useDispatch } from "react-redux";
+
+import { createNote } from "../../../redux/note/noteController";
+
+function Addsubject() {
   const navigate = useNavigate();
-  const [note, setNote] = useState();
   const [subject, setSubject] = useState();
+  const [title, setTitle] = useState();
   const [voiceParmition, setVoiceParmition] = useState(true);
+  const [image , setImage]= useState(null)
+  
+  const { transcript, listening, browserSupportsSpeechRecognition } =
+  useSpeechRecognition();
 
-  const noteHandeler = (e) => {
-    setNote(e.target.value);
-  };
+  const dispatch = useDispatch()
 
-  const subjectHandeler = (e) => {
-    setSubject(e.target.value);
+
+
+  const fileHandle = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      // if (reader.readyState === 2) {
+      setImage(reader.result);
+      // }
+    };
+    reader.readAsDataURL(file);
   };
-  // console.log(note, subject);
+ 
 
   const formHandeler = async (e) => {
     e.preventDefault();
     try {
-        if(!note || !subject)  return toast.info("all filled are required");
-     
-      const { data } = await axios.post(
-        `${baseUrl}/note`,
-        { subject, note },
-        {
-          headers: { Content_type: "application/json" },
-          withCredentials: true,
-        }
-      );
-      toast.success(data.message);
-      navigate("/");
+        if(!subject || !title)  return toast.info("all filled are required");
+
+      const myData = new FormData()
+      
+      myData.append("image" , image)
+      myData.set("title" , title)
+      myData.set("subject" , subject)
+      
+      dispatch(createNote(myData))
+      // toast.success(data.message);
+      // navigate("/");
     } catch (error) {
-      // console.log('error:=>',error)
+      console.log('error:=>',error)
       toast.error(error.message || error.response.data.message);
     }
   };
 
-  const { transcript, listening, browserSupportsSpeechRecognition } =
-    useSpeechRecognition();
+  
 
   useEffect(() => {
-    setNote(transcript);
+    setSubject(transcript);
   }, [transcript]);
 
   if (!browserSupportsSpeechRecognition) {
@@ -92,22 +107,37 @@ function AddNote() {
       )}
 
       <form action="" onSubmit={formHandeler}>
+       
+      <label className="primary_input label" htmlFor="file">
+        
+           <div className="img-container">
+            <img src={image !==null ? image:img} alt="important document" />
+           </div>
+           <div className="img-input">
+            <img src={imgPlaceHolder} alt="" />
+           <b style={{color:"#CB3CFF"}}>Click to upload image</b> svg, jpg , jpeg or gif file .
+           </div>
+        </label>
+
+        <input style={{display:"none"}} type="file" name="" id="file" accept="image/*"
+        onChange={fileHandle} />
+
         <input
           type="text"
-          name="subject"
-          placeholder="subject"
-          onChange={subjectHandeler}
+          name="title"
+          placeholder="title"
+          onChange={(e)=> setTitle(e.target.value)}
         />
 
         <textarea
           className="primary_inputbox textbox"
-          name="note"
-          id="note"
-          value={note || transcript}
+          name="subject"
+          id="subject"
+          value={subject || transcript}
           cols="30"
           rows="10"
           placeholder="text..."
-          onChange={noteHandeler}
+          onChange={(e)=>setSubject(e.target.value)}
           onClick={textControle}
         >
           ok
@@ -120,4 +150,4 @@ function AddNote() {
   );
 }
 
-export default AddNote;
+export default Addsubject;

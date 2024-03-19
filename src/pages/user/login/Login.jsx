@@ -1,36 +1,48 @@
-import axios from "axios";
+
 import React, { useState } from "react";
+
 import { toast } from "react-toastify";
-import { baseUrl } from "../../../App";
 import { Link, useNavigate } from "react-router-dom";
+
 import './login.scss'
 
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { logInUser } from "../../../redux/user/userController";
+
+import Loader from 'react-js-loader'
+
+
 function Login() {
-  const [user, setUser] = useState({});
+  const [email , setEmail]= useState()
+  const [password , setPassword]=useState()
+
   const navigate = useNavigate()
-  const dataHandaler = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
+  
+  const dispatch = useDispatch()
+  const state= useSelector((state)=>state.user)
 
   const submitHandaler = async (e) => {
     e.preventDefault();
 
-    if (!user.email || !user.password)
+    if (!email || !password)
       return toast.error("fill all requirment fill");
 
     try {
-      const data = await axios.post(`${baseUrl}/user/login`, user, {
-        headers: { Content_type: "application/json" },
-        withCredentials: true,
-      });
+      console.log(email , password);
+      dispatch(logInUser({email , password}))
       // console.log(data);
-      toast.success(data.message);
-      navigate('/')
+      // toast.success(data.message);
+      // navigate('/')
     } catch (error) {
       toast.error(error.response.data.message);
       // console.log(error);
     }
   };
+
+  if(state.status === "loginSuccess"){
+    navigate('/')
+  }
 
   return (
     <div className="login_container">
@@ -39,19 +51,23 @@ function Login() {
           type="text"
           name="email"
           placeholder="enter email"
-          onChange={dataHandaler}
+          onChange={(e)=> setEmail(e.target.value)}
         />
         <input
           type="password"
           name="password"
           placeholder="enter password"
-          onChange={dataHandaler}
+          onChange={(e)=>setPassword(e.target.value)}
         />
         <button
           type="submit"
           className="primary_button"
           onClick={submitHandaler}
         >
+           {
+            state.status === "pending" ? (<Loader type={"spinner-circle"} color={"black"} size={40}/>):""
+          }
+          
           Log in
         </button>
         <br />
