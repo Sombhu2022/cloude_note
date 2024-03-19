@@ -6,18 +6,26 @@ import './note.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import ReactTimeAgo from 'react-time-ago'
+// import ReactTimeAgo from 'react-time-ago'
 
-function Note({ note, id,subject , date, onDelete }) {
+function Note({title ,  id,subject ,image ,  date, onDelete }) {
+  console.log(image);
   return (
+    
     <div className="main_div note_container" >
-      <p>{subject}
+      {
+        image?   <img className="img" src={image?.url} alt="" />:""
+      }
+   
+      <p>{title}
       </p>
       <div className="option_container">
 
       <div className="time_container">
-      <ReactTimeAgo date={date} locale="en-US"/>
+      {/* <ReactTimeAgo date={date} locale="en-US"/> */}
+      {date}
       </div>
+
       <div className="options">
 
       <button className="button delete_button" onClick={onDelete}>

@@ -19,6 +19,40 @@
             outline: none;
             width: 100%;
         }
+        .label{
+            border: solid 1px white;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 10px;
+            margin-block: 10px;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 30px;
+            justify-content: space-evenly;
+            align-items: center;
+            // border: solid 1px red;
+            >.img-container{
+                width: 180px;
+                height:auto;
+                > img{
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 10px;
+                }
+            }
+            >.img-input{
+                // width: 200px;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                >img{
+                    height: 40px;
+                    width: 40px;
+                    align-self: center;
+                }
+
+            }
+        }
        
         >button{
             width: 100%;

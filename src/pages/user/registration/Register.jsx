@@ -37,6 +37,10 @@ function Register() {
     };
     reader.readAsDataURL(file);
   };
+
+  if(state.status === "regSuccess"){
+       navigate('/')
+  }
  
 
   const submitHandaler =async (e) => {
@@ -48,15 +52,21 @@ function Register() {
     if (password !== cPassword)
       return toast.error("password and confirm password are not matched");
 
-     
-    const data = new FormData();
-    data.append("dp", dp);
-    data.set("name", name);
-    data.set("email", email);
-    data.set("password", password);
-
-    dispatch(createUser(data));
-    
+     try {
+      
+       const data = new FormData();
+       data.append("dp", dp);
+       data.set("name", name);
+       data.set("email", email);
+       data.set("password", password);
+   
+      dispatch(createUser(data));
+     } catch (error) {
+       console.log(error);
+     }finally{
+       
+      //  navigate('/')
+     }
   };
 
 

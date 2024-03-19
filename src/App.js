@@ -11,8 +11,23 @@ import View from "./pages/note/show/View";
 import AddNote from "./pages/note/post/AddNote";
 import Edit from "./pages/note/edit/Edit";
 import ProfilePage from "./pages/user/profile/ProfilePage";
+import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { authUser } from "./redux/user/userController";
+import { allNote } from "./redux/note/noteController";
 
 function App() {
+
+  const dispatch = useDispatch()
+ 
+
+   useEffect(()=>{
+      dispatch(authUser())
+   } , [])
+
+
   return (
     <div className="App">
       <ToastContainer

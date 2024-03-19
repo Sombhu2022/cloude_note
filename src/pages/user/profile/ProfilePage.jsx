@@ -4,21 +4,23 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { baseUrl } from '../../../App';
 import './profile.scss'
+import { useDispatch, useSelector } from 'react-redux';
+import { authUser } from '../../../redux/user/userController';
 
 function ProfilePage() {
 
-  const [user , setUser] = useState({})
-  const {id} = useParams('');
+  const {user} = useSelector((state)=>state.user)
+  // const [user , setUser] = useState({})
+  console.log("user profile" ,user);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch()
 
   const getUser = async () => {
     try {
-      const { data } = await axios.get(`${baseUrl}/user/${id}`, {
-        headers: { Content_type: "application/json" },
-        withCredentials: true,
-      });
+       dispatch(authUser())
       // console.log(data.user);
-      setUser(data.user);
+      // setUser(data.user);
       toast.info("manage your profile")
     } catch (error) {
       // console.log(error);
@@ -28,25 +30,21 @@ function ProfilePage() {
   };
 
 
-  useEffect(()=>{
-       getUser();
-  },[])
-
   const deleteUser = async () => {
-    try {
-      const { data } = await axios.delete(`${baseUrl}/user/${user._id}`, {
-        headers: { Content_type: "application/json" },
+    // try {
+    //   const { data } = await axios.delete(`${baseUrl}/user/${user._id}`, {
+    //     headers: { Content_type: "application/json" },
 
-        withCredentials: true,
-      });
-      toast.success(data.message);
-      navigate('/')
-    } catch (error) {
-      // console.log(error);
-      toast.error(error.message || error.response.data.message);
+    //     withCredentials: true,
+    //   });
+    //   toast.success(data.message);
+    //   navigate('/')
+    // } catch (error) {
+    //   // console.log(error);
+    //   toast.error(error.message || error.response.data.message);
 
 
-    }
+    // }
   };
 
   

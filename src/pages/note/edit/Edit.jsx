@@ -3,48 +3,36 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { baseUrl } from "../../../App";
+import API from "../../../utils/axiosSetup";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { editNote, selectNote } from "../../../redux/note/noteController";
 
 function Edit() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [note, setNote] = useState({});
-
-  const getNote = async () => {
-    try {
-      const { data } = await axios.get(`${baseUrl}/note/${id}`, {
-        headers: { Content_type: "application/json" },
-        withCredentials:true,
-      });
-      setNote(data.note); 
-    } catch (err) {
-      // console.log(err);
-      toast.success(err.message);
-    }
-  };
-
-//  console.log(note)
-
-  useEffect(() => {
-    getNote();
-  }, [id]);
+  const [data, setData] = useState({});
+  console.log(id);
+  const {note , noteSelect , status} = useSelector(state=> state.note)
+  console.log(note);
+  const dispatch = useDispatch()
+  const getUser=()=>{
+    dispatch(selectNote(id))
+    setData(noteSelect)
+  }
+ 
+   console.log(data);
 
   const noteHandeler = (e) => {
-    setNote({...note , [e.target.name]:e.target.value});
+    setData({...data , [e.target.name]:e.target.value});
   };
 
   const formHandeler = async (e) => {
     e.preventDefault();
     try {
-      if(!note.note || !note.subject) return toast.info("all filled are required")
-      const { data } = await axios.patch(
-        `${baseUrl}/note/${id}`,
-         note ,
-        {
-          headers: { Content_type: "application/json" },
-          withCredentials:true,
-        },
-      );
-      toast.success(data.message);
+      if(!data.note || !data.subject) return toast.info("all filled are required")
+     dispatch(editNote(id , data))
+      // toast.success(data.message);
       navigate("/");
     } catch (error) {
       // console.log("error:=>", error);
@@ -52,6 +40,10 @@ function Edit() {
 
     }
   };
+
+  useEffect(()=>{
+    getUser()
+  },[])
   
   return (
     <div className="main_div addNode_container">
@@ -62,7 +54,7 @@ function Edit() {
           id=""
           onChange={noteHandeler}
           placeholder="Subject..."
-         value={note.subject}
+         value={data.title}
         />
         <textarea
           className="primary_inputbox"
@@ -72,9 +64,10 @@ function Edit() {
           rows="10"
           placeholder="add note"
           onChange={noteHandeler}
-          value={note.note}
+          defaultValue={data.subject}
+          value={data.subject}
         >
-          Text...
+          Text... 
         </textarea>
         <button className="primary_button" type="submit">
           Update
