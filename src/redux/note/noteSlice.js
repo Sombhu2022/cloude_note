@@ -43,12 +43,14 @@ export const noteSlice = createSlice({
             state.status = "pending"
             state.error = null
             state.message = null
+            state.noteSelect={}
         })
         builder.addCase( allNote.fulfilled , (state , action)=>{
             state.status = "success"
             state.error = null
             state.message = null
             state.note = action.payload.note
+            state.noteSelect={}
         })
         builder.addCase( allNote.rejected , (state , action)=>{
             state.status = "rejected"
@@ -59,16 +61,19 @@ export const noteSlice = createSlice({
     //    delete note
         builder.addCase( deleteNote.pending , (state , action)=>{
             state.status = "pending"
+            state.noteSelect={}
             state.error = null
             state.message = null
         })
         builder.addCase( deleteNote.fulfilled , (state , action)=>{
             state.status = "delSuccess"
+            state.noteSelect={}
             state.error = null
             state.message = null
             // state.note.pop(action.payload.note)
-            state.note = state.note.filter(ele=> ele !== action.payload.note)
-            console.log(state.note);
+            // state.note = state.note.filter(ele=> ele !== action.payload.note)
+            // console.log(state.note);
+            state.note = action.payload.note
         })
         builder.addCase( deleteNote.rejected , (state , action)=>{
             state.status = "rejected"
@@ -107,10 +112,12 @@ export const noteSlice = createSlice({
         builder.addCase( editNote.fulfilled , (state , action)=>{
             state.status = "editSuccess"
             state.error = null
-            state.message = null
+            state.message = "edit success"
             // state.note.pop(action.payload.note)
-            let select= state.note.filter(ele=> ele === action.payload.note)
-            console.log(select);
+            state.noteSelect={}
+            state.note = action.payload.note
+            // let select= state.note.filter(ele=> ele === action.payload.note)
+            // console.log(select);
         })
         builder.addCase( editNote.rejected , (state , action)=>{
             state.status = "rejected"

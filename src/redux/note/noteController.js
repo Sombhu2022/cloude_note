@@ -49,15 +49,17 @@ export const selectNote =createAsyncThunk("note/selectNote" , async(id)=>{
       return data
 })
 
-export const editNote =createAsyncThunk("note/editNote" , async(id ,note)=>{
-     
+export const editNote =createAsyncThunk("note/editNote" , async(fromData)=>{
+     const {id , title , subject} = fromData
+     console.log(id ,subject , title);
   const { data } = await API.patch(
     `${baseUrl}/note/${id}`,
-     note ,
+     {title , subject} ,
     {
       headers: { Content_type: "application/json" },
       withCredentials:true,
     },
   );
+  console.log(data);
       return data
 })
