@@ -49,7 +49,7 @@ export const selectNote =createAsyncThunk("note/selectNote" , async(id)=>{
       return data
 })
 
-export const editNote =createAsyncThunk("note/editNote" , async(id , note)=>{
+export const editNote =createAsyncThunk("note/editNote" , async(id ,note)=>{
      
   const { data } = await API.patch(
     `${baseUrl}/note/${id}`,

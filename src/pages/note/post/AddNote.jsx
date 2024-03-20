@@ -17,9 +17,11 @@ import {
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { createNote } from "../../../redux/note/noteController";
+import Loader from 'react-js-loader'
+
 
 function Addsubject() {
   const navigate = useNavigate();
@@ -32,7 +34,11 @@ function Addsubject() {
   useSpeechRecognition();
 
   const dispatch = useDispatch()
+  const {status} = useSelector(state=>state.note)
 
+  if(status === "createSuccess"){
+       navigate('/')
+  }
 
 
   const fileHandle = async (e) => {
@@ -142,8 +148,15 @@ function Addsubject() {
         >
           ok
         </textarea>
-        <button type="submit" className="primary_button">
-          Submit
+        <button
+          type="submit"
+          className="primary_button"
+        >
+           {
+            status === "pending" ? (<Loader type={"spinner-circle"} color={"black"} size={40}/>):""
+          }
+          
+          Add 
         </button>
       </form>
     </div>

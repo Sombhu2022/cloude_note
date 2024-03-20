@@ -11,27 +11,25 @@ import { editNote, selectNote } from "../../../redux/note/noteController";
 function Edit() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [data, setData] = useState({});
+ 
+ 
   console.log(id);
   const {note , noteSelect , status} = useSelector(state=> state.note)
   console.log(note);
   const dispatch = useDispatch()
-  const getUser=()=>{
-    dispatch(selectNote(id))
-    setData(noteSelect)
-  }
- 
-   console.log(data);
 
-  const noteHandeler = (e) => {
-    setData({...data , [e.target.name]:e.target.value});
-  };
+
+  const [title , setTitle] = useState(noteSelect?.title)
+  const [subject , setSubject]=useState(noteSelect?.subject)
+  //  console.log( noteSelect , title , subject);
+
+  
 
   const formHandeler = async (e) => {
     e.preventDefault();
     try {
-      if(!data.note || !data.subject) return toast.info("all filled are required")
-     dispatch(editNote(id , data))
+      if(!title || !subject) return toast.info("all filled are required")
+     dispatch(editNote(id ,{ title , subject}))
       // toast.success(data.message);
       navigate("/");
     } catch (error) {
@@ -42,8 +40,8 @@ function Edit() {
   };
 
   useEffect(()=>{
-    getUser()
-  },[])
+    dispatch(selectNote(id))
+  },[id])
   
   return (
     <div className="main_div addNode_container">
@@ -52,9 +50,10 @@ function Edit() {
           type="text"
           name="subject"
           id=""
-          onChange={noteHandeler}
+          onChange={(e)=>setTitle(e.target.value)}
           placeholder="Subject..."
-         value={data.title}
+          // defaultValue={noteSelect.title}
+          value={title}
         />
         <textarea
           className="primary_inputbox"
@@ -63,11 +62,11 @@ function Edit() {
           cols="30"
           rows="10"
           placeholder="add note"
-          onChange={noteHandeler}
-          defaultValue={data.subject}
-          value={data.subject}
+          onChange={(e)=>setSubject(e.target.value)}
+          // defaultValue={noteSelect?.subject}
+          value={subject}
         >
-          Text... 
+          
         </textarea>
         <button className="primary_button" type="submit">
           Update

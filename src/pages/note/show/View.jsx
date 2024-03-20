@@ -17,6 +17,9 @@ import { logoutUser } from "../../../redux/user/userController";
 
 import { deleteNote } from "../../../redux/note/noteController";
 
+
+import Loader from 'react-js-loader'
+
 function View() {
   // const [usercookie , setUserCookie]=useState('')
   const [totalUser, setTotalUser] = useState();
@@ -26,7 +29,7 @@ function View() {
   const navigete = useNavigate();
 
   const dispatch = useDispatch()
-  const noteState = useSelector((state)=>state.note)
+  
   const {user , isAuthenticate , status , error} = useSelector((state)=>state.user)
   const {note} = useSelector((state)=> state.note)
   
@@ -132,7 +135,7 @@ console.log(user , note);
           </div>
         </div>
 
-        {note?.map((ele, index) => {
+        {isAuthenticate?  note?.map((ele, index) => {
           return (
             <div key={index}>
               <Note
@@ -146,7 +149,7 @@ console.log(user , note);
               {/* <Edit onEdit={editNote}/> */}
             </div>
           );
-        })}
+        }): (<Loader type={"spinner-circle"} color={"blue"} size={40}/>) }
       </div>
       <div className="user_countainer">
         <div className="user">
