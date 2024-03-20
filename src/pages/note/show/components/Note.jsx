@@ -7,23 +7,52 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 // import ReactTimeAgo from 'react-time-ago'
+import moment from 'moment';
+import TimeAgo from 'timeago-react';
+// import TimeAgo from 'javascript-time-ago'
+
 
 function Note({title ,  id,subject ,image ,  date, onDelete }) {
-  console.log(image);
+//   console.log(image);
+//  const dateFormate = new Date(date)
+//   const year = dateFormate.getFullYear()
+//   const day = dateFormate.getDay()
+//   const month = dateFormate.getMonth()
+//   const min = dateFormate.getMinutes()
+//   const sec= dateFormate.getSeconds()
+//   const h = dateFormate.getHours()
+//   console.log(year , month , day , min , sec , h);
+// console.log(date);
+const formattedDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
+// console.log(formattedDate); 
+
+const dated =  Date.now()
+const da = Date(date)
+console.log(da);
+
+
   return (
     
     <div className="main_div note_container" >
+      <div className="img_container">
       {
         image?   <img className="img" src={image?.url} alt="" />:""
       }
+
+      </div>
    
-      <p>{title}
-      </p>
+      <h3>{title}
+      </h3>
+      <p>{subject}</p>
       <div className="option_container">
 
       <div className="time_container">
       {/* <ReactTimeAgo date={date} locale="en-US"/> */}
-      {date}
+      <TimeAgo
+      datetime={formattedDate}
+      />
+      {/* {date} */}
+      
       </div>
 
       <div className="options">
