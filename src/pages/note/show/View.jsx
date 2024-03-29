@@ -52,9 +52,15 @@ console.log(user , note);
       // setAuthenticate(true);
     } catch (error) {
       // console.log(error);
+
       if (error.response.data.success === false) {
 
       }
+
+      toast.info("Add your importent node..");
+        // setAuthenticate(false);
+      
+
     }
   };
 
