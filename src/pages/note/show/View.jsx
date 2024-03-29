@@ -138,7 +138,7 @@ console.log(user , note);
           </div>
         </div>
 
-        {status !== "panding"?  note?.map((ele, index) => {
+        {isAuthenticate?  note?.map((ele, index) => {
           return (
             <div key={index}>
               <Note
@@ -152,7 +152,10 @@ console.log(user , note);
               {/* <Edit onEdit={editNote}/> */}
             </div>
           );
-        }): (<Loader type={"spinner-circle"} color={"blue"} size={40}/>) }
+        }): (
+        // <Loader type={"spinner-circle"} color={"blue"} size={40}/>
+        ""
+        ) }
       </div>
       <div className="user_countainer">
         <div className="user">
