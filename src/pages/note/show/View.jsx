@@ -30,8 +30,8 @@ function View() {
 
   const dispatch = useDispatch()
   
-  const {user , isAuthenticate , status , error} = useSelector((state)=>state.user)
-  const {note} = useSelector((state)=> state.note)
+  const {user , isAuthenticate  , error} = useSelector((state)=>state.user)
+  const {note , status } = useSelector((state)=> state.note)
   
 console.log(user , note);
   const postNavigate = () => {
@@ -112,7 +112,10 @@ console.log(user , note);
           </div>
           <div className="right_container">
             {/* <FontAwesomeIcon icon={faGear} onClick={profileHandle} /> */}
-            <img src={user.dp?.url} />
+            {
+              isAuthenticate?(<img src={user.dp?.url} />):""
+            }
+
           </div>
         </div>
 
@@ -135,7 +138,7 @@ console.log(user , note);
           </div>
         </div>
 
-        {isAuthenticate?  note?.map((ele, index) => {
+        {status !== "panding"?  note?.map((ele, index) => {
           return (
             <div key={index}>
               <Note

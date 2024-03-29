@@ -58,5 +58,7 @@ function App() {
 }
 
 export default App;
-export const baseUrl = "https://note-api-cbkb.onrender.com" 
-// export const baseUrl = "http://localhost:8080"
+// export const baseUrl = "https://note-api-cbkb.onrender.com" 
+// export const baseUrl ="https://note-e2q3sl2ma-sombhu2022.vercel.app"
+export const baseUrl = "http://localhost:8080"
+// export const baseUrl = "https://note-api-eosin.vercel.app"
