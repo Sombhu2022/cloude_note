@@ -14,22 +14,6 @@ function ProfilePage() {
   console.log("user profile" ,user);
   const navigate = useNavigate();
 
-  const dispatch = useDispatch()
-
-  const getUser = async () => {
-    try {
-       dispatch(authUser())
-      // console.log(data.user);
-      // setUser(data.user);
-      toast.info("manage your profile")
-    } catch (error) {
-      // console.log(error);
-      toast.success("somthing error...")
-       
-    }
-  };
-
-
   const deleteUser = async () => {
     // try {
     //   const { data } = await axios.delete(`${baseUrl}/user/${user._id}`, {
@@ -47,18 +31,18 @@ function ProfilePage() {
     // }
   };
 
-  
+  console.log(user);
 
 
   return (
     <div className='main_div profile_container'>
       <div className='data_container'>
-        
+         <img src={`${user.dp.url}`}  />
          <h2>{user.name}</h2>
          <hr/>
         {/* <p>{user.postAt}</p> */}
         <p>{user.email}</p>
-        <button onClick={deleteUser} className='primary_button'>delete</button> 
+        {/* <button onClick={deleteUser} className='primary_button'>delete</button>  */}
       </div>
     </div>
   )

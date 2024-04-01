@@ -18,6 +18,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        >img{
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+        }
 
         >h2 , >p{
             margin: 10px auto;
