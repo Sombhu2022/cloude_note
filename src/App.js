@@ -50,7 +50,7 @@ function App() {
           <Route path="/sign up" element={<Register />}></Route>
           <Route path="/edit/:id" element={<Edit/>}></Route>
           <Route path="/log in" element={<Login />}></Route>
-          <Route path="/profile/:id" element={<ProfilePage/>}></Route>
+          <Route path="/profile" element={<ProfilePage/>}></Route>
         </Routes>
       </Router>
     </div>

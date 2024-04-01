@@ -95,7 +95,7 @@ console.log(user , note);
 
   const profileHandle = () => {
     if (isAuthenticate) {
-      navigete(`/profile/${user._id}`);
+      navigete(`/profile`);
     } else {
       toast.info("first log in , then manage your profile");
     }
