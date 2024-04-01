@@ -26,7 +26,7 @@ function Note({title ,  id,subject ,image ,  date, onDelete }) {
 const formattedDate = moment(date).format("YYYY-MM-DD HH:mm:ss");
 // console.log(formattedDate); 
 
-const dated =  Date.now()
+
 const da = Date(date)
 console.log(da);
 
@@ -34,12 +34,14 @@ console.log(da);
   return (
     
     <div className="main_div note_container" >
-      <div className="img_container">
       {
-        image?   <img className="img" src={image?.url} alt="" />:""
+        image? (
+          <div className="img_container">
+          <img className="img" src={image?.url} alt="" />
+          </div>
+        ):""
       }
 
-      </div>
    
       <h3>{title}
       </h3>

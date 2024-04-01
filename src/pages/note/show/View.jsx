@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Note from "./components/Note";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -119,7 +119,11 @@ console.log(user , note);
           <div className="right_container">
             {/* <FontAwesomeIcon icon={faGear} onClick={profileHandle} /> */}
             {
-              isAuthenticate?(<img src={user.dp?.url} />):""
+              isAuthenticate?(
+                <Link to={`/profile/${user._id}`} className="link">
+                <img src={user.dp?.url} />
+                </Link>
+              ):""
             }
 
           </div>
