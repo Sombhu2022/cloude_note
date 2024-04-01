@@ -6,6 +6,8 @@ import "./addNode.scss";
 import img from "./place.jpeg"
 import imgPlaceHolder from '../../user/registration/img.svg'
 
+import imageCompression from "browser-image-compression";
+
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -16,6 +18,7 @@ import {
   faVolumeHigh,
   faVolumeXmark,
 } from "@fortawesome/free-solid-svg-icons";
+
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -43,13 +46,27 @@ function Addsubject() {
 
   const fileHandle = async (e) => {
     const file = e.target.files[0];
+    console.log(`originalFile size ${file.size / 1024 / 1024} MB`);
+    let originalSize = file.size / 1024 / 1024;
+
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
+      const compressedFile = await imageCompression(file, options);
+      console.log(
+        `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+      );
+      // setCPSize((compressedFile.size / 1024 / 1024).toFixed(3))
     const reader = new FileReader();
     reader.onload = () => {
       // if (reader.readyState === 2) {
       setImage(reader.result);
       // }
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(compressedFile);
   };
  
 
@@ -57,6 +74,8 @@ function Addsubject() {
     e.preventDefault();
     try {
         if(!subject || !title)  return toast.info("all filled are required");
+       
+
 
       const myData = new FormData()
       
@@ -72,6 +91,7 @@ function Addsubject() {
       toast.error(error.message || error.response.data.message);
     }
   };
+
 
   
 
