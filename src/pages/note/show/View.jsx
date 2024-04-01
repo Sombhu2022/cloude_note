@@ -95,7 +95,7 @@ console.log(user , note);
 
   const profileHandle = () => {
     if (isAuthenticate) {
-      navigete(`/profile/${user.id}`);
+      navigete(`/profile/${user._id}`);
     } else {
       toast.info("first log in , then manage your profile");
     }
@@ -120,9 +120,9 @@ console.log(user , note);
             {/* <FontAwesomeIcon icon={faGear} onClick={profileHandle} /> */}
             {
               isAuthenticate?(
-                <Link to={`/profile/${user._id}`} className="link">
+                <div onClick={profileHandle} className="link">
                 <img src={user.dp?.url} />
-                </Link>
+                </div>
               ):""
             }
 
