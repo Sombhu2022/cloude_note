@@ -32,7 +32,9 @@ function Addsubject() {
   const [title, setTitle] = useState();
   const [voiceParmition, setVoiceParmition] = useState(true);
   const [image , setImage]= useState(null)
-  
+  const [dateTime , setDateTime] = useState()
+  // const date = dateTime.split(/[-T:]/)
+  // console.log(dateTime , date);
   const { transcript, listening, browserSupportsSpeechRecognition } =
   useSpeechRecognition();
 
@@ -82,6 +84,7 @@ function Addsubject() {
       myData.append("image" , image)
       myData.set("title" , title)
       myData.set("subject" , subject)
+      myData.set("noticeTime" , dateTime  )
       
       dispatch(createNote(myData))
       // toast.success(data.message);
@@ -147,6 +150,8 @@ function Addsubject() {
 
         <input style={{display:"none"}} type="file" name="" id="file" accept="image/*"
         onChange={fileHandle} />
+
+        <input type="datetime-local" onChange={(e)=>setDateTime(e.target.value)} />
 
         <input
           type="text"
