@@ -52,18 +52,18 @@ export const userSlice = createSlice({
         builder.addCase(logInUser.fulfilled ,(state , action)=>{
             //  state.error = action.payload
             state.status ="loginSuccess";
-            state.message = action.payload.message 
+            state.message = action.payload?.message 
             state.isAuthenticate = true;
-            state.user = action.payload.user
-            localStorage.setItem("token" , action.payload.token)
+            state.user = action.payload?.user
+            localStorage.setItem("token" , action.payload?.token)
         } )
 
 
         builder.addCase(logInUser.rejected , (state , action)=>{
-            state.error=action.error.message
+            state.error=action.payload.error
             state.status="rejected"
             state.isAuthenticate=false
-            state.message = action.error.message
+            state.message = action.payload.error
         })
 
 
@@ -108,7 +108,7 @@ export const userSlice = createSlice({
             state.message = action.payload.message 
             state.isAuthenticate = false;
             state.user = {}
-            localStorage.setItem("token" , null)
+            localStorage.setItem("token" , '')
         } )
 
 

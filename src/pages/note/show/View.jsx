@@ -157,6 +157,7 @@ console.log(user , note);
                 id={ele._id}
                 image={ele.image}
                 date={ele.postAt}
+                remindingDate={ele.emailSendAt}
                 onDelete={() => deleteNoteHandle(ele._id)}
               />
               {/* <Edit onEdit={editNote}/> */}

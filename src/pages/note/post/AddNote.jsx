@@ -75,7 +75,7 @@ function Addsubject() {
   const formHandeler = async (e) => {
     e.preventDefault();
     try {
-        if(!subject || !title)  return toast.info("all filled are required");
+        if(!subject || !title || !dateTime)  return toast.info("all filled are required");
        
 
 
@@ -150,7 +150,7 @@ function Addsubject() {
 
         <input style={{display:"none"}} type="file" name="" id="file" accept="image/*"
         onChange={fileHandle} />
-
+         <p>Enter Reminding Date and Time</p>
         <input type="datetime-local" onChange={(e)=>setDateTime(e.target.value)} />
 
         <input

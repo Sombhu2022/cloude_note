@@ -12,7 +12,7 @@ import TimeAgo from 'timeago-react';
 // import TimeAgo from 'javascript-time-ago'
 
 
-function Note({title ,  id,subject ,image ,  date, onDelete }) {
+function Note({title ,  id,subject ,image ,  date, onDelete , remindingDate }) {
 //   console.log(image);
 //  const dateFormate = new Date(date)
 //   const year = dateFormate.getFullYear()
@@ -45,6 +45,7 @@ console.log(da);
    
       <h3>{title}
       </h3>
+      <p>{remindingDate}</p>
       <p>{subject}</p>
       <div className="option_container">
 
