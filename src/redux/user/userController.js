@@ -4,7 +4,7 @@ import { baseUrl } from "../../App";
 import API from "../../utils/axiosSetup";
 
 export const createUser = createAsyncThunk("user/createUser" , async(data)=>{
-    
+       console.log(data);
         const user = await API.post(`${baseUrl}/user/reg` , data ,{
             headers:{
                 "Content-Type":"multipart/form-data"
