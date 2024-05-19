@@ -113,7 +113,7 @@ console.log(user , note);
           {/* <img src={user.dp?.url} /> */}
             <h3>
               Wellcome ,<br />
-              {isAuthenticate ? user.name : " "}
+              {isAuthenticate ? user?.name : " "}
             </h3>
           </div>
           <div className="right_container">
