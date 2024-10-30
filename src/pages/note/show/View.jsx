@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { all } from "axios";
 import React, { useEffect, useState } from "react";
 import Note from "./components/Note";
 import { Link, useNavigate } from "react-router-dom";
@@ -65,14 +65,21 @@ console.log(user , note);
   };
 
   const deleteNoteHandle = async (id) => {
-    try {
-      dispatch(deleteNote(id))
-      // toast.success(data.message);
-      allNotes();
-    } catch (error) {
-      // console.log(error);
-      toast.error(error.message);
+    const isDelete = window.confirm("are you delete this note")
+    if(isDelete){
+      try {
+        dispatch(deleteNote(id))
+        // toast.success(data.message);
+        allNotes();
+      } catch (error) {
+        // console.log(error);
+        toast.error(error.message);
+      }
+
+    }else{
+      alert("your not is fully save")
     }
+    
   };
 
  
@@ -148,6 +155,8 @@ console.log(user , note);
           </div>
         </div>
 
+       <div className="all-data">
+
         {isAuthenticate?  note?.map((ele, index) => {
           return (
             <div key={index}>
@@ -160,13 +169,15 @@ console.log(user , note);
                 remindingDate={ele.emailSendAt}
                 onDelete={() => deleteNoteHandle(ele._id)}
               />
-              {/* <Edit onEdit={editNote}/> */}
+              {/* <Edit onEdit={1}/> */}
             </div>
           );
         }): (
         // <Loader type={"spinner-circle"} color={"blue"} size={40}/>
         ""
         ) }
+
+       </div>
       </div>
       <div className="user_countainer">
         <div className="user">
