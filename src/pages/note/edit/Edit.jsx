@@ -37,6 +37,7 @@ function EditAll() {
   const [image, setImage] = useState(null);
   const [dateTime, setDateTime] = useState();
   const [newImage , setNewImage] = useState()
+  const [loading , setLoading] = useState(false)
 
   // const date = dateTime.split(/[-T:]/)
   // console.log(dateTime , date);
@@ -97,6 +98,7 @@ function EditAll() {
      {
         if(newImage){
           try {
+            setLoading(true)
              const data = await API.patch(`${baseUrl}/note/image/${id}` , { newImage})
              console.log(data);
              if(data.status === 200){
@@ -106,6 +108,9 @@ function EditAll() {
           } catch (error) {
             console.log(error);
             
+          }
+          finally{
+            setLoading(false)
           }
         }else{
             alert("please change image")
@@ -168,7 +173,7 @@ function EditAll() {
         />
 
         <button type="submit" className="primary_button">
-          {status === "pending" ? (
+          {loading ? (
             <Loader type={"spinner-circle"} color={"black"} size={40} />
           ) : (
             ""
